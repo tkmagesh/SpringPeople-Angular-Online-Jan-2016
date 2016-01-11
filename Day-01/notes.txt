@@ -1,0 +1,32 @@
+What is Angular.js?
+    Framework for RIA applications
+
+RIA - web applications that offer the same user experience as that of desktop apps
+
+Browser - Network client + document renderer
+
+Virtual Operating System
+    1. Data Storage
+    2. Processing Capabilities (Multi threading)
+    3. Sockets
+    4. App Host
+    5. Device Access
+    
+    1. Local Storage, Session Storage, IndexedDb
+    2. Web Workers
+    3. Web Sockets, Server Sent Events
+    4. Offline Application Cache
+    5. Printer, Web Cam, Mic
+    6. Web RTC
+    
+Backbone.js
+Can.js
+Batman.js
+Spine.js
+Ember.js
+Dojo
+Ext.js
+Angular.js
+
+tkmagesh77@gmail.com
+
