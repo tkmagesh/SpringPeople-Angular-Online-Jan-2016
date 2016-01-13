@@ -26,17 +26,22 @@
         Object.prototype.toInt = function(){
             return parseInt(this, 10);
         }
-        //Model
-        function SalaryCalculator(){
-            this.basic = 0;
-            this.hra = 0;
-            this.da = 0;
-            this.tax = 0;
-            this.salary = 0;
+        function MathCalculator(){
+            this.operand1 = 0;
+            this.operand2 = 0;
+            this.result = 0;
         }
-        SalaryCalculator.prototype.calculate = function(){
-            var gross = this.basic + this.hra + this.da;
-            this.salary = gross * ((100-this.tax)/100);
+        MathCalculator.prototype.add = function(){
+            this.result = this.operand1 + this.operand2;
+        }
+        MathCalculator.prototype.subtract = function(){
+            this.result = this.operand1 - this.operand2;
+        }
+        MathCalculator.prototype.multiply = function(){
+            this.result = this.operand1 * this.operand2;
+        }
+        MathCalculator.prototype.divide = function(){
+            this.result = this.operand1 / this.operand2;
         }
 
         
@@ -78,36 +83,21 @@
             angular.injector(["ng"]).invoke(function($rootScope){
                window.scope = $rootScope;
             });
-            scope.calculator = new SalaryCalculator();
+            scope.calculator = new MathCalculator();
             bindScope(scope);
         }
         $(document).ready(init);
     </script>
 </head>
 <body>
-    <h1>Salary Calculator</h1>
-    <div class="content">
-        <div class="field">
-            <label for="">Basic :</label>
-            <input type="text" name="" id="txtBasic"  app-model="calculator.basic">
-        </div>
-        <div class="field">
-            <label for="">HRA :</label>
-            <input type="text" name="" id="txtHra" app-model="calculator.hra">
-        </div>
-        <div class="field">
-            <label for="">DA :</label>
-            <input type="text" name="" id="txtDa" app-model="calculator.da">
-        </div>
-        <div class="field">
-            <label for="">Tax :</label>
-            <input type="range" name="" id="rangeTax" min="0" max="30" value="0" app-model="calculator.tax">
-            <span id="spanTax" app-bind="calculator.tax">[Tax]</span>
-        </div>
-        <div class="field">
-            <input type="button" value="Calculate" id="btnCalculate" app-click="calculator.calculate()">
-        </div>
-        <div id="divResult" app-bind="calculator.salary">[Salary]</div>
-    </div>
+    <input type="text" app-model="calculator.operand1">
+    <input type="text" app-model="calculator.operand2">
+    <br>
+    <input type="button" value="Add" app-click="calculator.add()">
+    <input type="button" value="Subtract" app-click="calculator.subtract()">
+    <input type="button" value="Multiply" app-click="calculator.multiply()">
+    <input type="button" value="Divide" app-click="calculator.divide()">
+    <br>
+    <div id="divResult" app-bind="calculator.result"></div>
 </body>
 </html>

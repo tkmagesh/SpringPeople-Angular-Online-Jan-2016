@@ -1,0 +1,22 @@
+Module
+    - IoC container
+    - logical grouping of application components
+    
+Scope
+Directive - binds HTML with scope object
+Filter - transforms the data for presentation purposes
+Controller - function to configure the scope object
+
+All of the above - UI logic
+
+Value
+Factory
+Service
+Provider
+Constant
+
+Non - UI logic
+
+
+
+        
