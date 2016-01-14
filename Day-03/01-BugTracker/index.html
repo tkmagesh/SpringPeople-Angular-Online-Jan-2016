@@ -7,11 +7,11 @@
     /*
     Use Cases
     =========
-    1. List the bugs
-    2. Add a new bug
-    3. Toggle the 'closed' status of the bug
-    4. Remove closed bugs
-    5. Display statistics
+    1. List the bugs - done
+    2. Add a new bug - done
+    3. Toggle the 'closed' status of the bug - done
+    4. Remove closed bugs - done
+    5. Display statistics - done
     6. Search for bugs
     7. Sort the bugs
     8. Improve the bug display
@@ -22,42 +22,49 @@
     12. Categorize the bugs
     */
     </script>
-    <style>
-        .closed {
-            color : red;
-            text-decoration: line-through;
-            font-style: italic;
-            font-weight: bold;
-        }
-        section{
-            margin-bottom: 10px;
-        }
-        ol{
-            list-style: none;
-            width: 50%;
-        }
-        li{
-            border : 2px solid gray;
-            border-radius : 4px;
-            background-color: #e7e7e7;
-            padding: 5px;
-            margin-bottom: 5px;
-        }
-        li span{
-            font-size: 14pt;
-            cursor: pointer;
-        }
-        section.stats{
-            font-size: 18pt;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <script src="angular.js"></script>
+    <script>
+        var bugTrackerApp = angular.module("bugTrackerApp", []);
+        bugTrackerApp.controller("bugsController", function($scope){
+            $scope.getClosedCount = function(){
+                var result = 0;
+                for(var i=0; i<$scope.bugs.length; i++)
+                    if ($scope.bugs[i].isClosed)
+                        ++result;
+                return result;
+            };
+
+            $scope.bugs = [
+                { name : "Unable to add bugs", isClosed : false},
+                { name : "User authentication failure", isClosed : false},
+                { name : "Server communication distrupts frequently", isClosed : false},
+            ];
+            $scope.newBug = '';
+            $scope.addNew = function(){
+                var bug2Add = {
+                    name : $scope.newBug,
+                    isClosed : false
+                };
+                $scope.bugs.push(bug2Add);
+            };
+            $scope.toggle = function(bug){
+                bug.isClosed = !bug.isClosed;
+            };
+            $scope.removeClosed = function(){
+                for(var i=$scope.bugs.length-1; i>=0; i--)
+                    if ($scope.bugs[i].isClosed)
+                        $scope.bugs.splice(i,1);
+            };
+        });
+    </script>
 </head>
-<body>
+<body ng-app="bugTrackerApp" ng-controller="bugsController">
     <h1>Bug Tracker</h1>
     <section class="stats">
-        <span class="closed">2</span>
+        <span class="closed">{{getClosedCount()}}</span>
         <span class="separator">/</span>
-        <span>5</span>
+        <span>{{bugs.length}}</span>
     </section>
     <section class="search">
         <label for="">Search :</label>
@@ -73,15 +80,12 @@
     </section>
     <section class="list">
         <label for="">Bug :</label>
-        <input type="text" name="" id="">
-        <input type="button" value="Add New">
-        <input type="button" value="Remove Closed">
+        <input type="text" ng-model="newBug">
+        <input type="button" value="Add New" ng-click="addNew()">
+        <input type="button" value="Remove Closed" ng-click="removeClosed()">
         <ol>
-           <li>
-                <span class="closed">Unable to add bugs</span>
-           </li>
-            <li>
-                <span>User authentication failure</span>
+            <li ng-repeat="bug in bugs" ng-click="toggle(bug)">
+                <span ng-class="{closed : bug.isClosed}">{{bug}}</span>
             </li>
 
         </ol>
