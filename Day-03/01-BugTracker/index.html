@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bug Tracker</title>
+    <script>
+    /*
+    Use Cases
+    =========
+    1. List the bugs
+    2. Add a new bug
+    3. Toggle the 'closed' status of the bug
+    4. Remove closed bugs
+    5. Display statistics
+    6. Search for bugs
+    7. Sort the bugs
+    8. Improve the bug display
+    9. Persist the bugs in the localStorage
+    10. Display the 'createdAt' for each bug
+    11. Persist the bugs in the server
+    ======
+    12. Categorize the bugs
+    */
+    </script>
+    <style>
+        .closed {
+            color : red;
+            text-decoration: line-through;
+            font-style: italic;
+            font-weight: bold;
+        }
+        section{
+            margin-bottom: 10px;
+        }
+        ol{
+            list-style: none;
+            width: 50%;
+        }
+        li{
+            border : 2px solid gray;
+            border-radius : 4px;
+            background-color: #e7e7e7;
+            padding: 5px;
+            margin-bottom: 5px;
+        }
+        li span{
+            font-size: 14pt;
+            cursor: pointer;
+        }
+        section.stats{
+            font-size: 18pt;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bug Tracker</h1>
+    <section class="stats">
+        <span class="closed">2</span>
+        <span class="separator">/</span>
+        <span>5</span>
+    </section>
+    <section class="search">
+        <label for="">Search :</label>
+        <input type="text" name="" id="">
+        <label for="">isClosed ? :</label>
+        <input type="checkbox" name="" id="">
+    </section>
+    <section class="sort">
+        <label for="">Order By :</label>
+        <input type="text" name="" id="">
+        <label for="">Descending ? :</label>
+        <input type="checkbox" name="" id="">
+    </section>
+    <section class="list">
+        <label for="">Bug :</label>
+        <input type="text" name="" id="">
+        <input type="button" value="Add New">
+        <input type="button" value="Remove Closed">
+        <ol>
+           <li>
+                <span class="closed">Unable to add bugs</span>
+           </li>
+            <li>
+                <span>User authentication failure</span>
+            </li>
+
+        </ol>
+    </section>
+</body>
+</html>

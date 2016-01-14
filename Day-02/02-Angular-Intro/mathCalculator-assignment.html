@@ -43,23 +43,40 @@
 
         var calculatorApp = angular.module("calculatorApp", []);
 
-        calculatorApp.run(function($rootScope, $http, $q, $compile, $parse){
-            console.log(arguments);
-            //$rootScope.calculator = new MathCalculator();
+        calculatorApp.controller("calculatorController", function($scope){
+            $scope.calculator = new MathCalculator();
+            $scope.operation = '';
+            $scope.calculate = function(){
+                $scope.calculator[$scope.operation]();
+                /*switch ($scope.operation){
+                    case 'add' :
+                        $scope.calculator.add();
+                        break;
+                    case 'subtract' :
+                        $scope.calculator.subtract();
+                        break;
+                    case 'multiply' :
+                        $scope.calculator.multiply();
+                        break;
+                    case 'divide' :
+                        $scope.calculator.divide();
+                        break;
+                }*/
+            }
         });
 
     </script>
 </head>
-<body ng-app="calculatorApp">
+<body ng-app="calculatorApp" ng-controller="calculatorController">
     <input type="number" ng-model="calculator.operand1">
-    <select name="" id="">
+    <select ng-model="operation">
         <option value="add">add</option>
         <option value="subtract">subtract</option>
         <option value="multiply">multiply</option>
         <option value="divide">divide</option>
     </select>
     <input type="number" ng-model="calculator.operand2">
-    <input type="button" value="Calculate">
+    <input type="button" value="Calculate" ng-click="calculate()">
     <br>
     <div id="divResult" ng-bind="calculator.result"></div>
 </body>
