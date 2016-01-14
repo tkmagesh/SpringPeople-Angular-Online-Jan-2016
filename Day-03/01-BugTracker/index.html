@@ -20,13 +20,39 @@
     11. Persist the bugs in the server
     ======
     12. Categorize the bugs
+
+    Controller - UI logic
+
     */
     </script>
     <link rel="stylesheet" href="style.css">
     <script src="angular.js"></script>
     <script>
         var bugTrackerApp = angular.module("bugTrackerApp", []);
-        bugTrackerApp.controller("bugsController", function($scope){
+
+        //Model
+        /*bugTrackerApp.value("Bug", function (defaultValues){
+            this.name = defaultValues.name || '';
+            this.isClosed = defaultValues.isClosed || false;
+            this.toggle = function(){
+                this.isClosed = !this.isClosed;
+            };
+        });*/
+
+        bugTrackerApp.factory("Bug", function(){
+            function Bug(defaultValues){
+                this.name = defaultValues.name || '';
+                this.isClosed = defaultValues.isClosed || false;
+            }
+            Bug.prototype.toggle = function(){
+                this.isClosed = !this.isClosed;
+            };
+            return Bug;
+        });
+
+
+
+        bugTrackerApp.controller("bugsController", function($scope, Bug){
             $scope.getClosedCount = function(){
                 var result = 0;
                 for(var i=0; i<$scope.bugs.length; i++)
@@ -36,20 +62,17 @@
             };
 
             $scope.bugs = [
-                { name : "Unable to add bugs", isClosed : false},
-                { name : "User authentication failure", isClosed : false},
-                { name : "Server communication distrupts frequently", isClosed : false},
+                new Bug({ name : "Unable to add bugs", isClosed : false}),
+                new Bug({ name : "User authentication failure", isClosed : false}),
+                new Bug({ name : "Server communication distrupts frequently", isClosed : false}),
             ];
             $scope.newBug = '';
             $scope.addNew = function(){
-                var bug2Add = {
-                    name : $scope.newBug,
-                    isClosed : false
-                };
+                var bug2Add = new Bug({ name : $scope.newBug});
                 $scope.bugs.push(bug2Add);
             };
             $scope.toggle = function(bug){
-                bug.isClosed = !bug.isClosed;
+                bug.toggle();
             };
             $scope.removeClosed = function(){
                 for(var i=$scope.bugs.length-1; i>=0; i--)
