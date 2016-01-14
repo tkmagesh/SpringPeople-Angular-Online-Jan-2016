@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <style>
+        .field{
+            margin-bottom: 10px;
+        }
+        label{
+            display: block;
+        }
+        #divResult{
+            color : red;
+            font-size: 18pt;
+        }
+    </style>
+
+    <script src="angular.js"></script>
+
+    <script>
+        Object.prototype.toInt = function(){
+            return parseInt(this, 10);
+        }
+        function MathCalculator(){
+            this.operand1 = 0;
+            this.operand2 = 0;
+            this.result = 0;
+        }
+        MathCalculator.prototype.add = function(){
+            this.result = this.operand1 + this.operand2;
+        }
+        MathCalculator.prototype.subtract = function(){
+            this.result = this.operand1 - this.operand2;
+        }
+        MathCalculator.prototype.multiply = function(){
+            this.result = this.operand1 * this.operand2;
+        }
+        MathCalculator.prototype.divide = function(){
+            this.result = this.operand1 / this.operand2;
+        }
+
+        var calculatorApp = angular.module("calculatorApp", []);
+
+        calculatorApp.run(function($rootScope, $http, $q, $compile, $parse){
+            console.log(arguments);
+            //$rootScope.calculator = new MathCalculator();
+        });
+
+    </script>
+</head>
+<body ng-app="calculatorApp">
+    <input type="number" ng-model="calculator.operand1">
+    <select name="" id="">
+        <option value="add">add</option>
+        <option value="subtract">subtract</option>
+        <option value="multiply">multiply</option>
+        <option value="divide">divide</option>
+    </select>
+    <input type="number" ng-model="calculator.operand2">
+    <input type="button" value="Calculate">
+    <br>
+    <div id="divResult" ng-bind="calculator.result"></div>
+</body>
+</html>
