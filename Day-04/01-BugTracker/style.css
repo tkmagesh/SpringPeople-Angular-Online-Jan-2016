@@ -1,0 +1,27 @@
+.closed {
+    color : red;
+    text-decoration: line-through;
+    font-style: italic;
+    font-weight: bold;
+}
+section{
+    margin-bottom: 10px;
+}
+ol{
+    list-style: none;
+    width: 50%;
+}
+li{
+    border : 2px solid gray;
+    border-radius : 4px;
+    background-color: #e7e7e7;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+li span{
+    font-size: 14pt;
+    cursor: pointer;
+}
+section.stats{
+    font-size: 18pt;
+}
