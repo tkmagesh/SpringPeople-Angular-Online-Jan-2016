@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Routing Demo</title>
+    <style>
+        ol.menu{
+            list-style: none;
+        }
+        ol.menu li{
+            display: inline;
+            margin-right: 10px;
+        }
+
+    </style>
+    <script src="angular.js"></script>
+    <script src="angular-route.js"></script>
+    <script>
+    angular
+        .module("myApp", ["ngRoute"])
+        .config(function($routeProvider){
+            $routeProvider
+                .when("/products", {
+                    /*template : "<h3>Products</h3>*/
+                    templateUrl : "templates/productsTemplate.html",
+                    controller : "productsController"
+                })
+                .when("/products/:pid", {
+                    templateUrl : "templates/productInfoTemplate.html",
+                    controller : "productInfoController"
+                })
+                .when("/customers", {
+                    /*template : "<h3>Customers</h3>"*/
+                    templateUrl : "templates/customersTemplate.html"
+                })
+                .otherwise({
+                    redirectTo : "/products"
+                });
+        })
+        .service("productsServer", function(){
+            this.getAll = function(){
+                return [
+                    {id : 1, name : "Pen", cost : 5, units : 100, desc : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam a nesciunt fuga ratione alias facilis est dolore nihil iste, aperiam reprehenderit voluptates. Dolorem a sapiente vitae incidunt consequatur, doloremque ipsum!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste distinctio quam autem! Voluptate dolor ratione veritatis perspiciatis officia ab, magni. Voluptatem maiores excepturi illum facilis quam libero, veniam aperiam adipisci.Lorem ipsum dolor sit amet, consectetur adipisicing elit."},
+                    {id : 2, name : "Hen", cost : 100, units : 10, desc : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam a nesciunt fuga ratione alias facilis est dolore nihil iste, aperiam reprehenderit voluptates. Dolorem a sapiente vitae incidunt consequatur, doloremque ipsum!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste distinctio quam autem! Voluptate dolor ratione veritatis perspiciatis officia ab, magni. Voluptatem maiores excepturi illum facilis quam libero, veniam aperiam adipisci.Lorem ipsum dolor sit amet, consectetur adipisicing elit."},
+                    {id : 3, name : "Den", cost : 1000, units : 20, desc : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam a nesciunt fuga ratione alias facilis est dolore nihil iste, aperiam reprehenderit voluptates. Dolorem a sapiente vitae incidunt consequatur, doloremque ipsum!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste distinctio quam autem! Voluptate dolor ratione veritatis perspiciatis officia ab, magni. Voluptatem maiores excepturi illum facilis quam libero, veniam aperiam adipisci.Lorem ipsum dolor sit amet, consectetur adipisicing elit."},
+                    {id : 4, name : "Zen", cost : 100000, units : 10000, desc : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam a nesciunt fuga ratione alias facilis est dolore nihil iste, aperiam reprehenderit voluptates. Dolorem a sapiente vitae incidunt consequatur, doloremque ipsum!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste distinctio quam autem! Voluptate dolor ratione veritatis perspiciatis officia ab, magni. Voluptatem maiores excepturi illum facilis quam libero, veniam aperiam adipisci.Lorem ipsum dolor sit amet, consectetur adipisicing elit."}
+                ]
+            };
+        })
+        .controller("productsController", function($scope, productsServer){
+            $scope.products = productsServer.getAll();
+        })
+        .controller("productInfoController", function($scope, productsServer, $routeParams){
+            var productId = parseInt($routeParams.pid);
+            $scope.product = productsServer.getAll().filter(function(product){
+                return product.id === productId;
+            })[0];
+        });
+    </script>
+</head>
+<body ng-app="myApp">
+    <h1>My Cart</h1>
+    <ol class="menu">
+        <li><a href="#/products">Products</a></li>
+        <li><a href="#/customers">Customers</a></li>
+    </ol>
+    <hr>
+    <div ng-view></div>
+</body>
+</html>
