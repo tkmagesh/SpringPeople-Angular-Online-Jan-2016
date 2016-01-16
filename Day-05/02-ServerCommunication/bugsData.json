@@ -1,0 +1,22 @@
+{
+  "bugs": [
+    {
+      "id": 2,
+      "name": "This is juz another new bug",
+      "isClosed": false,
+      "createdAt": "2016-01-13T04:24:50.973Z"
+    },
+    {
+      "id": 4,
+      "name": "Promise is not working",
+      "isClosed": false,
+      "createdAt": "2016-01-16T16:06:39.751Z"
+    },
+    {
+      "id": 7,
+      "name": "another bug - 3",
+      "isClosed": false,
+      "createdAt": "2016-01-16T16:13:02.688Z"
+    }
+  ]
+}

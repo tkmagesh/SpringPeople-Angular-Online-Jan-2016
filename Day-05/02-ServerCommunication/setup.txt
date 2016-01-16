@@ -1,0 +1,14 @@
+Install node.js (http://nodejs.org)
+open "node.js command prompt"
+> npm install json-server -g
+
+run
+===
+
+json-server bugsData.json
+
+REST
+GET - select
+POST - insert
+PUT - update
+DELETE - delete
