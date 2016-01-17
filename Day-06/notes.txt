@@ -1,0 +1,31 @@
+1. Package.json
+    manifest file 
+    
+2. Jasmine - Testing framework
+      apis to organize the tests
+      assertion apis
+      mock/fake/spy dependencies
+3. Karma
+      test runner
+      
+4. Bower
+      client side dependency
+      
+5. Protractor
+     Wrapper on selenium web driver
+     
+6. npm (node package manager)
+     
+Angular-seed
+https://github.com/angular/angular-seed
+
+
+controllers
+filters
+services
+factories
+
+
+ProductsManager
+    
+CustomerManager
